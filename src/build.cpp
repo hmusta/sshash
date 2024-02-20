@@ -18,6 +18,9 @@ int build(int argc, char** argv) {
     parser.add("seed",
                "Seed for construction (default is " + std::to_string(constants::seed) + ").", "-s",
                false);
+    parser.add("threads",
+               "Number of threads (default is 8 if available, 1 otherwise).", "-n",
+               std::hardware_concurrency() >= 8 ? 8 : 1)
     parser.add("l",
                "A (integer) constant that controls the space/time trade-off of the dictionary. "
                "A reasonable values lies in [2.." +
@@ -58,6 +61,7 @@ int build(int argc, char** argv) {
     build_configuration build_config;
     build_config.k = k;
     build_config.m = m;
+    build_config.num_threads = parser.get<uint64_t>("threads");
 
     if (parser.parsed("seed")) build_config.seed = parser.get<uint64_t>("seed");
     if (parser.parsed("l")) build_config.l = parser.get<double>("l");

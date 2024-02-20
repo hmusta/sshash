@@ -85,6 +85,7 @@ struct build_configuration {
         , l(constants::min_l)
         , c(constants::c)
 
+        , num_threads(1)
         , canonical_parsing(false)
         , weighted(false)
         , verbose(true)
@@ -98,6 +99,7 @@ struct build_configuration {
     uint64_t l;  // drive dictionary trade-off
     double c;    // drive PTHash trade-off
 
+    uint64_t num_threads;
     bool canonical_parsing;
     bool weighted;
     bool verbose;
